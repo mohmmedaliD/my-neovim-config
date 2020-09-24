@@ -14,6 +14,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'davidhalter/jedi-vim'
+Plug 'christoomey/vim-sort-motion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tmhedberg/SimpylFold'
 Plug 'othree/javascript-libraries-syntax.vim'
@@ -48,6 +49,12 @@ Plug 'prettier/vim-prettier', {
     \ 'html',
     \ 'swift' ] }
 
+
+fu ExecuteCommand()
+   let l:Command = expand("<cword>")
+   execute "!" . l:Command
+endfu
+set keywordprg=!
 set shell=/bin/bash
 set encoding=utf-8
 set number
@@ -99,9 +106,9 @@ silent! nmap <F7> :setfiletype css<CR>
 " silent! nmap <F9> :<CR>
 " silent! nmap <F10> :<CR>
 imap <F11> <Esc> <CR>
-let g:user_emmet_expandabbr_key='+'
+let g:user_emmet_expandabbr_key='<F8>'
 " imap <expr> <F2> emmet#expandAbbrIntelligent("\<F2>")
-map <C-s> :tabn<cr>
+map <C-d> :tabn<cr>
 let g:airline_theme='base16_default'
 " disable autocompletion, cause we use deoplete for completion
 let g:jedi#completions_enabled = 0
@@ -111,5 +118,6 @@ let g:jedi#use_splits_not_buffers = "right"
 " List ends here. Plugins become visible to Vim after this call.
 "
 "
+
 source $HOME/.config/nvim/plug-config/coc.vim
 call plug#end()
