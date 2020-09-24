@@ -109,6 +109,7 @@ imap <F11> <Esc> <CR>
 let g:user_emmet_expandabbr_key='<F8>'
 " imap <expr> <F2> emmet#expandAbbrIntelligent("\<F2>")
 map <C-d> :tabn<cr>
+map <C-A-d> :tabp<cr>
 let g:airline_theme='base16_default'
 " disable autocompletion, cause we use deoplete for completion
 let g:jedi#completions_enabled = 0
