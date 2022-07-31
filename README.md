@@ -4,10 +4,9 @@
 
 # .bashrc
 
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
-# install fd-find the_silver_searcher
+# install fd-find , the_silver_searcher
 Eample:
 sudo dnf install fd-find the_silver_searcher
 
