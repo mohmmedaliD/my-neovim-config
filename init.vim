@@ -71,17 +71,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'kristijanhusak/deoplete-phpactor'
-
-let g:deoplete#enable_at_startup = 1
-
 let g:phpactorPhpBin = "/usr/bin/php"
 
 let NERDTreeShowHidden=1
@@ -139,7 +128,7 @@ let g:indentLine_char_list = ['¦','.']
 silent! nmap <F3> :NERDTreeToggle<CR>
 silent! nmap <F4> :call FindIfNotOpen()<CR>
 silent! nmap <F5> :call ToggleNum() <CR>
-" silent! nmap <F7> :setfiletype css<CR>
+silent! nmap <F12> :tabnew <CR>
 function ToggleNum() 
   if &number
     :set nonumber norelativenumber
@@ -178,6 +167,9 @@ function FindIfNotOpen()
     :NERDTreeFind
   endif
 endfunction
+function OpenColorT()
+  :hi Normal ctermfg=white ctermbg=black
+endfunction
 
 " silent! nmap <F9> :<CR>
 " silent! nmap <F10> :<CR>
@@ -196,7 +188,7 @@ let g:jedi#use_splits_not_buffers = "right"
 "
 "
 
-let g:colorscheme = "darkblue"
+" let g:colorscheme = "darkblue"
 
 
 " bootstrap config
@@ -220,11 +212,30 @@ let g:fzf_action = {
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-map <C-f> :Files<CR>
+map <C-f> :call ExitNerdTreeAndFind()<CR>
+map <C-g> :call ExitNerdTreeAndFindWord()<CR>
 map <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
+nnoremap <leader>g :RG<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
+
+function ExitNerdTreeAndFind() 
+  if exists("b:NERDTree")
+      :wincmd l
+      :Files
+    else
+      :Files
+    endif
+endfunction
+
+function ExitNerdTreeAndFindWord() 
+  if exists("b:NERDTree")
+      :wincmd l
+      :Ag
+    else
+      :Ag
+    endif
+endfunction
 
 
 let g:fzf_tags_command = 'ctags -R'
@@ -281,8 +292,7 @@ command! -bang -nargs=* GGrep
 "
 
 
-
-
+:call OpenColorT()
 
 
 source $HOME/.config/nvim/plug-config/coc.vim
